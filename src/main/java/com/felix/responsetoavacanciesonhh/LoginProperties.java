@@ -11,7 +11,7 @@ public class LoginProperties {
 
     static {
         try {
-            fileInputStream = new FileInputStream("/home/felix/IdeaProjects/response-to-a-vacancies-on-hh/src/main/resources/login.properties");
+            fileInputStream = new FileInputStream("/home/felix/IdeaProjects/response-to-a-vacanies-on-hh/src/main/resources/login.properties");
             properties = new Properties();
             properties.load(fileInputStream);
         } catch (IOException e) {

@@ -15,30 +15,28 @@ public class ResponseToAVacanciesOnHhApplication {
 
     public static void main(String[] args) throws InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver", "/home/felix/IdeaProjects/chromedriver");
-        WebDriver webDriver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
 
-        webDriver.get("https://hh.ru/account/login?backurl=%2F&hhtmFrom=main");
+//        перед запуском сверь данные ОС в классе LoginProperties
 
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Felix\\IdeaProjects\\chromedriver.exe");
+        // переходим на сайт ХХ
+        ChromeWebDriver.webDriver.get("https://hh.ru/account/login?backurl=%2F&hhtmFrom=main");
 
-//        wait.wait(5000);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[8]/div/div/div/div[2]/div[2]/span"))).click();
+//        убираем всплывающее окошко
+        ChromeWebDriver.waitingPageAndClick(By.xpath("/html/body/div[8]/div/div/div/div[2]/div[2]/span"));
 
-//        webDriver.findElement(By.className("bloko-icon bloko-icon_cancel bloko-icon_initial-default")).click();
-//        нажимаем на кнопку "Войти с паролем", чтобы разблокировать функцию входа
-//        используя логин и пароль
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/div/form/div[4]/button[2]"))).click();
+//        открываем форму для ввода логина и пароля и вводим туда данные
+        ChromeWebDriver.waitingPageAndClick(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/div/form/div[4]/button[2]"));
+        ChromeWebDriver.waitingPageAndFillForm(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[1]/input"), "username");
+        ChromeWebDriver.waitingPageAndFillForm(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[2]/span/input"), "password");
+        ChromeWebDriver.waitingPageAndClick(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[4]/div/button[1]"));
 
+//        для Linux
+//        System.setProperty("webdriver.chrome.driver", "/home/felix/IdeaProjects/chromedriver");
 
+//        для Windows
+//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Felix\\IdeaProjects\\chromedriver.exe");
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[1]/input"))).sendKeys(LoginProperties.getProperty("username"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[2]/span/input"))).sendKeys(LoginProperties.getProperty("password"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[7]/div/button[1]"))).click();
-
-
-
-//        SpringApplication.run(ResponseToAVacanciesOnHhApplication.class, args);
     }
 
 }

@@ -11,7 +11,10 @@ public class LoginProperties {
 
     static {
         try {
-            fileInputStream = new FileInputStream("/home/felix/IdeaProjects/response-to-a-vacanies-on-hh/src/main/resources/login.properties");
+//            for Linux
+//            fileInputStream = new FileInputStream("/home/felix/IdeaProjects/response-to-a-vacanies-on-hh/src/main/resources/login.properties");
+//            for Windows on work
+            fileInputStream = new FileInputStream("C:\\Users\\Felix\\IdeaProjects\\response-to-a-vacanies-on-hh\\src\\main\\resources\\login.properties");
             properties = new Properties();
             properties.load(fileInputStream);
         } catch (IOException e) {

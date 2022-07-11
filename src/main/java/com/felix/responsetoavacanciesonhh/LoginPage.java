@@ -1,46 +1,20 @@
 package com.felix.responsetoavacanciesonhh;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.By;
 
-public class LoginPage {
+public class LoginPage{
 
-    public WebDriver driver;
-    public LoginPage(WebDriver driver){
-        PageFactory.initElements(driver, this);
-        this.driver = driver;
-    }
+    public void authoriseInSite(ChromeWebDriver driver) throws InterruptedException {
+//         переходим на сайт ХХ
+        driver.getWebDriver().get("https://hh.ru/account/login?backurl=%2F&hhtmFrom=main");
 
+//        убираем всплывающее окошко
+        driver.waitingPageAndClick(By.xpath("/html/body/div[8]/div/div/div/div[2]/div[2]/span"));
 
-    @FindBy(xpath = "//*[contains(@class, 'bloko-form-item')]")
-    private WebElement loginField;
-
-    @FindBy(xpath = "//*[contains(@class, 'bloko-link bloko-link_pseudo')]")
-    private WebElement clickToOpenPassField;
-
-
-    @FindBy(xpath = "//*[contains(@class, 'bloko-input_password')]")
-    private WebElement passField;
-
-
-    @FindBy(xpath = "//*[contains(@class, 'bloko-button_kind-primary')]")
-    private WebElement authWithLoginAndPassword;
-
-    public void inputLogin(String login){
-        loginField.sendKeys(login);
-    }
-
-    public void clickToOpenPasswordField(){
-        clickToOpenPassField.click();
-    }
-
-    public void inputPassword(String password){
-        passField.sendKeys(password);
-    }
-
-    public void authoriseBtn(){
-        authWithLoginAndPassword.click();
+//        открываем форму для ввода логина и пароля и вводим туда данные
+        driver.waitingPageAndClick(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/div/form/div[4]/button[2]"));
+        driver.waitingPageAndFillForm(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[1]/input"), "username");
+        driver.waitingPageAndFillForm(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[2]/span/input"), "password");
+        driver.waitingPageAndClick(By.xpath("//*[@id=\"HH-React-Root\"]/div/div[3]/div[1]/div/div/div/div/div/div[1]/div[1]/div[1]/div[2]/div/form/div[4]/div/button[1]"));
     }
 }
